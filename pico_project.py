@@ -997,9 +997,9 @@ def GenerateCMake(folder, params):
                  "cmake_minimum_required(VERSION 3.13)\n\n"
                  "set(CMAKE_C_STANDARD 11)\n"
                  "set(CMAKE_CXX_STANDARD 17)\n\n"
-                 "# Initialise pico_sdk from installed location\n"
-                 "# (note this can come from environment, CMake cache etc)\n"
-                 f"set(PICO_SDK_PATH {sdk_path})\n\n"
+                #  "# Initialise pico_sdk from installed location\n"
+                #  "# (note this can come from environment, CMake cache etc)\n"
+                #  f"set(PICO_SDK_PATH {sdk_path})\n\n"
                  f"set(PICO_BOARD {board_type} CACHE STRING \"Board type\")\n\n"
                  "# Pull in Raspberry Pi Pico SDK (must be before project)\n"
                  "include(pico_sdk_import.cmake)\n\n"
@@ -1136,7 +1136,11 @@ def generateProjectFiles(projectPath, projectName, sdkPath, projects, debugger):
                   '      "request": "launch",\n'
                   '      "type": "cortex-debug",\n'
                   '      "servertype": "openocd",\n'
-                  '      "gdbPath": "gdb-multiarch",\n'
+                  '      "serverpath": "${env:OPEN_OCD_PATH}",\n'
+                  '      "searchDir": [\n'
+                  '          "${env:OPEN_OCD_TCL_PATH}",\n'
+                  '      ],\n'
+                  '      "gdbPath": "arm-none-eabi-gdb",\n'
                   '      "device": "RP2040",\n'
                   '      "configFiles": [\n' + \
                   f'        "interface/{deb}",\n' + \
