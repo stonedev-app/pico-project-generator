@@ -56,7 +56,7 @@ optional arguments:
   -cppex, --cppexceptions
                         Enable C++ exceptions (Uses more memory)
   -d DEBUGGER, --debugger DEBUGGER
-                        Select debugger (0 = SWD, 1 = PicoProbe)
+                        Select debugger (0 = SWD, 1 = PicoProbe, 2 = CMSIS-DAP)
   -board BOARDTYPE, --boardtype BOARDTYPE
                         Select board type (see --boardlist for available boards)
   -bl, --boardlist      List available board types

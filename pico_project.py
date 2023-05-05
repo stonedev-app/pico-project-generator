@@ -75,8 +75,8 @@ stdlib_examples_list = {
     'div' :     ("Low level HW Divider",    "divider.c",        "hardware/divider.h",   "hardware_divider")
 }
 
-debugger_list = ["SWD", "PicoProbe"]
-debugger_config_list = ["raspberrypi-swd.cfg", "picoprobe.cfg"]
+debugger_list = ["SWD", "PicoProbe", "CMSIS-DAP"]
+debugger_config_list = ["raspberrypi-swd.cfg", "picoprobe.cfg", "cmsis-dap.cfg"]
 
 DEFINES = 0
 INITIALISERS = 1
