@@ -6,6 +6,29 @@ The tool will generate all required CMake files, program files and VSCode IDE fi
 
 It will also add example code for any features and optionally for some standard library functions.
 
+### **This is a version with modified settings for debugging with VSCode using picoprobe on a Mac**  
+1. Environment setting  
+   1. Add the pico-sdk environment variables to .zshrc  
+   `export PICO_SDK_PATH=/xxx/xxx/pico/pico-sdk`  
+   1. Add the OpenOCD environment variables to .zshrc  
+   `export OPEN_OCD_PATH=/xxx/xxx/pico/openocd/src/openocd`  
+   1. Add the OpenOCD tcl environment variables to .zshrc  
+   `export OPEN_OCD_TCL_PATH=/xxx/xxx/pico/openocd/tcl`  
+   1. If necessary, add the adapter speed setting to /`openocd/tcl/cmsis-dap.cfg`  
+   adapter speed 500  
+   1. Install arm-none-eabi-gdb  
+   `% brew install arm-none-eabi-gdb`  
+   1. Download ZIP or git clone pico-project-generator  
+1. Use pico-project-generator
+   1. Running python scripts  
+   `% cd pico-project-generator`  
+   `% ./pico_project.py [project name] -p vscode -d 2`  
+   1. Open the [project name] folder in VSCode, and then start Debugging  
+
+\* **Refer to the following links for installation of pico-sdk, OpenOCD, etc**  
+[getting-started-with-pico.pdf](https://datasheets.raspberrypi.com/pico/getting-started-with-pico.pdf)
+
+
 ### Notes for installation on Windows
 
 If you are using the Windows installer, the version of Python that is part of that package does not include TKInter
