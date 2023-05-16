@@ -16,8 +16,6 @@ It will also add example code for any features and optionally for some standard 
    `export OPEN_OCD_TCL_PATH=/xxx/xxx/pico/openocd/tcl`  
    1. If necessary, add the adapter speed setting to /`openocd/tcl/cmsis-dap.cfg`  
    adapter speed 500  
-   1. Install arm-none-eabi-gdb  
-   `% brew install arm-none-eabi-gdb`  
    1. Download ZIP or git clone pico-project-generator  
 1. Use pico-project-generator
    1. Running python scripts  
