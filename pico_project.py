@@ -31,6 +31,7 @@ CMAKECACHE_FILENAME = 'CMakeCache.txt'
 COMPILER_NAME = 'arm-none-eabi-gcc'
 
 VSCODE_LAUNCH_FILENAME = 'launch.json'
+VSCODE_TASKS_FILENAME = 'tasks.json'
 VSCODE_C_PROPERTIES_FILENAME = 'c_cpp_properties.json'
 VSCODE_SETTINGS_FILENAME ='settings.json'
 VSCODE_EXTENSIONS_FILENAME ='extensions.json'
@@ -1156,6 +1157,48 @@ def generateProjectFiles(projectPath, projectName, sdkPath, projects, debugger):
                   '    }\n'
                   '  ]\n'
                   '}\n')
+            
+            t1 = ('{\n'
+                  '  // See https://go.microsoft.com/fwlink/?LinkId=733558\n'
+                  '  // for the documentation about the tasks.json format\n'
+                  '  "version": "2.0.0",\n'
+                  '  "tasks": [\n'
+                  '    {\n'
+                  '      "type": "cmake",\n'
+                  f'      "label": "CMake: build {projectName}",\n'
+                  '      "command": "build",\n'
+                  '      "targets": [\n'
+                  f'        "{projectName}"\n'
+                  '      ],\n'
+                  '      "group": "build",\n'
+                  f'      "detail": "CMake {projectName} build task"\n'
+                  '    },\n'
+                  '    {\n'
+                  '      "type": "shell",\n'
+                  f'      "label": "OpenOCD: upload {projectName}",\n'
+                  '      "command": "${env:OPEN_OCD_PATH}",\n'
+                  '      "args": [\n'
+                  '        "-f",\n'
+                  f'        "interface/{deb}",\n'
+                  '        "-f",\n'
+                  '        "target/rp2040.cfg",\n'
+                  '        "-s",\n'
+                  '        "${env:OPEN_OCD_TCL_PATH}",\n'
+                  '        "-c",\n'
+                  '        "\\"program ${command:cmake.launchTargetPath} verify reset exit\\""\n'
+                  '      ],\n'
+                  '      "options": {\n'
+                  '        "cwd": "${workspaceRoot}/build"\n'
+                  '      },\n'
+                  f'      "dependsOn":["CMake: build {projectName}"],\n'
+                  '      "group": {\n'
+                  '        "kind": "build",\n'
+                  '        "isDefault": true\n'
+                  '      },\n'
+                  f'      "detail": "OpenOCD {projectName} upload task",\n'
+                  '    },\n'
+                  '  ]\n'
+                  '}\n')
 
             c1 = ('{\n'
                   '  "configurations": [\n'
@@ -1211,6 +1254,10 @@ def generateProjectFiles(projectPath, projectName, sdkPath, projects, debugger):
             filename = VSCODE_LAUNCH_FILENAME
             file = open(filename, 'w')
             file.write(v1)
+            file.close()
+
+            file = open(VSCODE_TASKS_FILENAME, 'w')
+            file.write(t1)
             file.close()
 
             file = open(VSCODE_C_PROPERTIES_FILENAME, 'w')
